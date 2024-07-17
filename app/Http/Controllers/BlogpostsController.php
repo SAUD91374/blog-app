@@ -42,7 +42,6 @@ class BlogpostsController extends Controller
         //
         // dd($request);
         $info=$request->validate([
-            'user_id'=>'required',
             'topics' => 'required',
             'author_name' => 'required|string|min:3|max:255',
             'title' => 'required|min:4|max:255',
@@ -78,8 +77,6 @@ class BlogpostsController extends Controller
         //
         // dd($blogposts);
         $bd = blogposts::find($id);
-        // dd($bd);
-        // return view('blog.edit', compact('bd'));
         return view('blog.edit', compact('bd'));
     }
 
@@ -91,21 +88,22 @@ class BlogpostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, blogposts $blogposts)
-    {
-        //
-        $info=$request->validate([
-            'author_name' => 'required|min:3',
-            'title' => 'required|min:4',
-            'blog_content' => 'required',
-        ]);
-        $blogposts->author_name=$request->author_name;
-        $blogposts->title=$request->title;
-        $blogposts->blog_content=$request->blog_content;
-        $blogposts->save();
+{
+    $request->validate([
+        'author_name' => 'required|string|min:3|max:255',
+        'title' => 'required|min:4|max:255',
+        'blog_content' => 'required',
 
-    $blogposts->update();
-    return redirect('/blog');
-    }
+    ]);
+    $blogposts->user_id=$request->user_id;
+    $blogposts->author_name=$request->author_name;
+    $blogposts->title=$request->title;
+    $blogposts->blog_content=$request->blog_content;
+    $blogposts->save();
+
+
+    return redirect('/blog')->with('success', 'Post created successfully.');
+}
 
     /**
      * Remove the specified resource from storage.

@@ -20,7 +20,8 @@ Route::get('/', function () {
 });
 Route::middleware('auth')->group(function(){
     
-    Route::get('/blog/{id}', [BlogpostsController::class, 'edit']);
+    // Route::get('/blog/{id}', [BlogpostsController::class, 'edit']);
+    Route::get('/blog/{id}/edit', [App\Http\Controllers\BlogpostsController::class,'edit'])->name('blog.edit');
     Route::resource('/blog',BlogpostsController::class);
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     // Route::delete('/blog/{id}', [BlogpostsController::class, 'destroy']);
