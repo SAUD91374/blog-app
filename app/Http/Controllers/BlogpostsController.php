@@ -73,12 +73,14 @@ class BlogpostsController extends Controller
      * @param  \App\Models\blogposts  $blogposts
      * @return \Illuminate\Http\Response
      */
-    public function edit(blogposts $blogposts)
+    public function edit(blogposts $blogposts,$id)
     {
         //
         // dd($blogposts);
-        
-        return view('blog.edit',['bd'=>$blogposts]);
+        $bd = blogposts::find($id);
+        // dd($bd);
+        // return view('blog.edit', compact('bd'));
+        return view('blog.edit', compact('bd'));
     }
 
     /**
@@ -111,11 +113,15 @@ class BlogpostsController extends Controller
      * @param  \App\Models\blogposts  $blogposts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(blogposts $blogposts)
+    public function destroy(blogposts $blogposts,$id)
     {
         //
-        $blogposts->find($blogposts->{'id'})->delete();
-        dd($blogposts);
-        return redirect('/blog');
+        $blogpost = blogposts::find($id);
+    if ($blogpost) {
+        $blogpost->delete();
+        return redirect()->route('blog.index')->with('success', 'Blog post deleted successfully');
+    } else {
+        return redirect()->route('blog.index')->with('error', 'Blog post not found');
+    }
     }
 }

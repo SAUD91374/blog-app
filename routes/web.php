@@ -19,9 +19,11 @@ Route::get('/', function () {
     return view('auth\login');
 });
 Route::middleware('auth')->group(function(){
-
+    
+    Route::get('/blog/{id}', [BlogpostsController::class, 'edit']);
     Route::resource('/blog',BlogpostsController::class);
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    // Route::delete('/blog/{id}', [BlogpostsController::class, 'destroy']);
 });
 Auth::routes();
 

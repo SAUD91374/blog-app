@@ -25,11 +25,6 @@
     </div>
 </div>
 @endsection
-<script>
-    function partblog(){
-
-    }
-</script>
 
 <style>
 .button-79 {
