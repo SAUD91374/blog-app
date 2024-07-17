@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if(session('success'))
+    
+<div class="alert alert-success">{{session('success')}}</div>
+@endif
 <div class="row justify-content-end mb-3">
     <div class="col-auto">
         <a href="/blog/{{Auth::id()}}" class="button-79" >Your Blogs</a>

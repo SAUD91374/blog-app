@@ -41,13 +41,20 @@ class BlogpostsController extends Controller
     {
         //
         // dd($request);
-        $info=$request->validate([
+        $request->validate([
             'topics' => 'required',
             'author_name' => 'required|string|min:3|max:255',
             'title' => 'required|min:4|max:255',
             'blog_content' => 'required',
 
         ]);
+        $info=[
+            'user_id'=>$request->user_id,
+            'topics'=>$request->topics,
+            'author_name'=>$request->author_name,
+            'title'=>$request->title,
+            'blog_content'=>$request->blog_content,
+        ];
     blogposts::create($info);
     return redirect('/blog')->with('success', 'Post created successfully.');
     }
@@ -102,7 +109,7 @@ class BlogpostsController extends Controller
     $blogposts->save();
 
 
-    return redirect('/blog')->with('success', 'Post created successfully.');
+    return redirect('/blog')->with('success', 'Post updated successfully.');
 }
 
     /**
@@ -114,12 +121,7 @@ class BlogpostsController extends Controller
     public function destroy(blogposts $blogposts,$id)
     {
         //
-        $blogpost = blogposts::find($id);
-    if ($blogpost) {
-        $blogpost->delete();
-        return redirect()->route('blog.index')->with('success', 'Blog post deleted successfully');
-    } else {
-        return redirect()->route('blog.index')->with('error', 'Blog post not found');
-    }
+        blogposts::find($id)->delete();
+        return redirect('/blog')->with('success', 'Blog post deleted successfully');
     }
 }
