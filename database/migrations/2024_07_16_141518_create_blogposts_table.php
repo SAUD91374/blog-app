@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('blogposts', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
+            $table->integer('user_id');
             $table->enum('topics',['fashion','entertainment','politics','health_and_fitness','research_and_news','other'])->default('other');
             $table->string('author_name');
             $table->string('title');
