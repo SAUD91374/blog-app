@@ -40,7 +40,7 @@ class BlogpostsController extends Controller
     public function store(Request $request)
     {
         //
-        // dd($request);
+        // dd($id);
         $request->validate([
             'topics' => 'required',
             'author_name' => 'required|string|min:3|max:255',
@@ -68,9 +68,9 @@ class BlogpostsController extends Controller
     public function show(blogposts $blogposts)
     {
         //
-        $bd = blogposts::where('user_id',Auth::id())->get();
+        $bshow = blogposts::where('user_id',Auth::id())->get();
         // dd($bd);
-        return view('blog.show', compact('bd'));
+        return view('blog.show', compact('bshow'));
     }
 
     /**
@@ -94,15 +94,17 @@ class BlogpostsController extends Controller
      * @param  \App\Models\blogposts  $blogposts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, blogposts $blogposts)
+    public function update(Request $request, blogposts $blogposts,$id)
 {
     $request->validate([
+        'topics' => 'required',
         'author_name' => 'required|string|min:3|max:255',
         'title' => 'required|min:4|max:255',
         'blog_content' => 'required',
 
     ]);
-    $blogposts->user_id=$request->user_id;
+    $blogposts=blogposts::find($id);
+    $blogposts->topics=$request->topics;
     $blogposts->author_name=$request->author_name;
     $blogposts->title=$request->title;
     $blogposts->blog_content=$request->blog_content;

@@ -18,10 +18,24 @@
                             </ul>
                         </div>
                         @endif
+                        {{-- @dd(); --}}
                         <form action="/blog/{{$bd['id']}}" method="POST">
                             @csrf
-                            @method('put')
+                            @method('put')  
                             <input type="hidden" name="user_id" id="user_id" value="{{Auth::id()}}">
+                            <div class="mb-3">
+                                <h4>Topics</h4><br>
+                                <label for="topics">Choose topics:</label><br>
+                                <b>Choose one</b><span class="text-danger">*</span>
+                                <select name="topics" id="topics" class="form-select">
+                                    <option value="fashion">Fashion</option>
+                                    <option value="entertainment">Entertainment</option>
+                                    <option value="politics">Politics</option>
+                                    <option value="health_and_fitness">Health and Fitness</option>
+                                    <option value="research_and_news">Research and News</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
                         <div class="form-group mb-3">
                             <label for="author_name" class="form-label">Author Name</label>
                             <input type="text" name="author_name" id="author_name" class="form-control" placeholder="Enter your name" value="{{$bd['author_name']}}">

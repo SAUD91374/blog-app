@@ -22,18 +22,16 @@
                         @csrf
                         <div class="mb-3">
                             <h4>Topics</h4><br>
-                            <label for="fashion">Fashion</label>
-                            <input type="checkbox" name="topics" id="fashion" value="{{'fashion'}}">
-                            <label for="entertainment">Entertainment</label>
-                            <input type="checkbox" name="topics" id="entertainment" value="{{'entertainment'}}">
-                            <label for="politics">Politics</label>
-                            <input type="checkbox" name="topics" id="politics" value="{{'politics'}}">
-                            <label for="health_and_fitness">Helath and Fitness</label>
-                            <input type="checkbox" name="topics" id="health_and_fitness" value="{{'health_and_fitness'}}">
-                            <label for="research_and_news">Research and News</label>
-                            <input type="checkbox" name="topics" id="research_and_news" value="{{'research_and_news'}}">
-                            <label for="other">Other</label>
-                            <input type="checkbox" name="topics" id="other" value="{{'other'}}">
+                            <label for="topics">Choose topics:</label>
+                            <h6>Choose one</h6>
+                            <select name="topics" id="topics" class="form-select">
+                                <option value="fashion">Fashion</option>
+                                <option value="entertainment">Entertainment</option>
+                                <option value="politics">Politics</option>
+                                <option value="health_and_fitness">Health and Fitness</option>
+                                <option value="research_and_news">Research and News</option>
+                                <option value="other">Other</option>
+                            </select>
                         </div>
                         <div class="form-group mb-3">
                             <label for="author_name" class="form-label">Author Name</label>
@@ -51,7 +49,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="blog_content" class="form-label">Blog Content</label>
-                            <textarea name="blog_content" id="blog_content" rows="10" class="form-control" placeholder="Write your blog content here" value="{{old('blog_content')}}"></textarea>
+                            <textarea name="blog_content" id="blog_content" rows="10" class="form-control" placeholder="Write your blog content here" >{{old('blog_content')}}</textarea>
                             @error('blog_content')
                             <div class="text text-danger">{{$message}}</div>
                             @enderror
